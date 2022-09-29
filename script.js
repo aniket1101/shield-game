@@ -1,32 +1,3 @@
-// FIREBASE-------------------------------------
-import { initializeApp } from 'firebase/app'; 
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, getDoc, getDocs } from 'firebase/firestore';
-
-const firebaseApp = initializeApp({
-    apiKey: "AIzaSyATjNdF0-fRtaN-BnNplfJQvnXzkF7ykjo",
-    authDomain: "shield-6ced7.firebaseapp.com",
-    projectId: "shield-6ced7",
-    storageBucket: "shield-6ced7.appspot.com",
-    messagingSenderId: "285684807236",
-    appId: "1:285684807236:web:c82db341903e07694b6e11",
-    measurementId: "G-BHGV6H2MRW"
-});
-
-const auth = getAuth(firebaseApp);
-const db = getFirestore(firebaseApp);
-const usersCol = collection(db, 'users');
-const snapshot = await getDocs(usersCol);
-
-// Detect Auth State
-onAuthStateChanged(auth, user => {
-    if (user !== null) {
-        console.log('logged in')
-    } else {
-        console.log('no user')
-    }
-});
-
 // GAME----------------------------------------
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
