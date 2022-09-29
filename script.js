@@ -1,3 +1,37 @@
+// FIREBASE-------------------------------------------------
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { Firestore } from "firebase/firestore";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyATjNdF0-fRtaN-BnNplfJQvnXzkF7ykjo",
+  authDomain: "shield-6ced7.firebaseapp.com",
+  projectId: "shield-6ced7",
+  storageBucket: "shield-6ced7.appspot.com",
+  messagingSenderId: "285684807236",
+  appId: "1:285684807236:web:c82db341903e07694b6e11",
+  measurementId: "G-BHGV6H2MRW"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const analytics = getAnalytics(app);
+
+// Add User to Firebase
+db.collection("users").doc()
+
+// GAME ----------------------------------------
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 

@@ -9,6 +9,8 @@
 <body>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://use.fontawesome.com/37a71263e1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <style>
     body{
         margin: 0;
@@ -22,20 +24,16 @@
         
         <div class="bg-white max-w-md w-full p-6 text-center rounded">
 
-            <h1 class="ml8">
+            <h1 class="ml8 mb-2 p-0">
                 <span class="letters-container">
                   <span class="letters letters-left">Shield</span>
                   <span class="letters bang">
                     <i class="fa fa-shield"></i>
                   </span>
                 </span>
-                <span class="circle circle-white"></span>
-                <span class="circle circle-dark"></span>
-                <span class="circle circle-container"><span class="circle circle-dark-dashed"></span></span>
             </h1>
               
             <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-            <!-- <h1 class="text-6xl font-bold italic leading-none py-4">Shield</h1> -->
 
             <style>
                 h1.ml8 {
