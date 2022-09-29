@@ -1,4 +1,33 @@
-// GAME ----------------------------------------
+// FIREBASE-------------------------------------
+import { initializeApp } from 'firebase/app'; 
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, collection, getDoc, getDocs } from 'firebase/firestore';
+
+const firebaseApp = initializeApp({
+    apiKey: "AIzaSyATjNdF0-fRtaN-BnNplfJQvnXzkF7ykjo",
+    authDomain: "shield-6ced7.firebaseapp.com",
+    projectId: "shield-6ced7",
+    storageBucket: "shield-6ced7.appspot.com",
+    messagingSenderId: "285684807236",
+    appId: "1:285684807236:web:c82db341903e07694b6e11",
+    measurementId: "G-BHGV6H2MRW"
+});
+
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+const usersCol = collection(db, 'users');
+const snapshot = await getDocs(usersCol);
+
+// Detect Auth State
+onAuthStateChanged(auth, user => {
+    if (user !== null) {
+        console.log('logged in')
+    } else {
+        console.log('no user')
+    }
+});
+
+// GAME----------------------------------------
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -112,6 +141,36 @@ class Particle {
     }
 }
 
+// class Coin {
+//     constructor(x, y, radius, color, velocity) {
+//         this.x = x;
+//         this.y = y;
+//         this.radius = radius;
+//         this.color = color;
+//         this.velocity = velocity;
+//     }
+
+//     draw() {
+//         ctx.beginPath();
+//         for (var i = 0; i < 6; i++) {
+//           ctx.lineTo(x + this.radius * Math.cos(a * i), y + this.radius * Math.sin(a * i));
+//         }
+//         ctx.closePath();
+//         ctx.stroke();
+//         // ctx.beginPath()
+//         // ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true)
+//         ctx.fillStyle = this.color;
+//         ctx.fill()
+//     }
+
+//     update() {
+//         this.draw()
+//         this.x = this.x + this.velocity.x;
+//         this.y = this.y + this.velocity.y;
+//     }
+// }
+
+
 // Game Agents------------------
 const x = canvas.width/2;
 const y = canvas.height/2;
@@ -120,8 +179,34 @@ let player = new Player(x, y, 15, 'white')
 let projectiles = [];
 let enemies = [];
 let particles = [];
+// let coins = [];
 
 // On-Screen Functions-------------------------
+
+// function spawnCoins() {
+//     setInterval(() => {
+//         const radius = 10;
+
+
+//         let x
+//         let y
+
+//         if(Math.random() < 0.5) {
+//             x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius;
+//             y = Math.random() * canvas.height;
+//         } else {
+//             x = Math.random() * canvas.width;
+//             y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius;
+//         }
+
+//         const color = `goldenrod`;
+//         const angle = Math.atan2(canvas.height/2 - y, canvas.width/2 - x);
+//         const velocity = {x: Math.cos(angle), y: Math.sin(angle)}
+
+//         coins.push(new Coin(x, y, radius, color, velocity))
+//     }, 1000)
+//     clearInterval(spawnCoins, 1000)
+// }
 
 function spawnEnemies() {
     setInterval(() => {
@@ -229,6 +314,7 @@ function initialise() {
     projectiles = [];
     enemies = [];
     particles = [];
+    // coins = [];
     score = 0;
     scoreElement.innerHTML = score
     scoreNumberElement.innerHTML = score
@@ -240,6 +326,7 @@ function initialise() {
 }
 
 spawnEnemies()
+// spawnCoins()
 
 
 // EVENT LISTENERS-----------------------
@@ -255,6 +342,13 @@ startSinglePlayerBtn.addEventListener('click', () => {
     initialise()
     animate()
     startGameModalElement.style.display = 'none'
+})
+
+startMultiplayerBtn.addEventListener('click', () => {
+    // initialise()
+    // animate()
+    // startGameModalElement.style.display = 'none'
+    console.log('Starting multiplayer game...')
 })
 
 gameOverHomeBtn.addEventListener('click', () => {
